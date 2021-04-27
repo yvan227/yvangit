@@ -1,0 +1,25 @@
+sharding:
+  jdbc:
+    datasource:
+      names: kbdev
+      kbdev:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/kbdev?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+        username: root
+        password: 123456
+    config:
+      sharding:
+        tables:
+          userinfo: #需要分片表名称
+            actual-data-nodes: kbdev.userinfo_$->{0..1}
+            table-strategy:
+              inline:
+                sharding-column: user_info_oid
+                algorithm-expression: userinfo_$->{user_info_oid % 2}
+      props:
+        sql:
+          show: true
+spring:
+  main:
+    allow-bean-definition-overriding: true

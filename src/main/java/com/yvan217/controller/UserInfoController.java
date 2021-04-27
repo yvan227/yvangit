@@ -20,7 +20,7 @@ public class UserInfoController {
 
     @RequestMapping("/insertuserInfo")
     public String insertuserInfo(){
-        for (int i = 1; i < 10; i++){
+        for (int i = 10; i < 20; i++){
             UserInfo userInfo = new UserInfo(i,"yvan217" +i ,"yvan217" +i ) ;
 
             try {
